@@ -2,13 +2,9 @@ from rich import print
 from rich.traceback import install
 install()
 
-class Jogador():
+class Player():
     """
-    Representa um jogador base no sistema de RPG tático em turnos.
-
-    Esta classe serve como classe mãe (superclasse) para as especializações
-    de combate (como Guerreiro, Assassino e Mago), gerenciando os atributos
-    vitais, inventário e ações fundamentais do personagem.
+    Representa um player base no sistema de RPG tático em turnos.
 
     Attributes:
         Nome (str): Nome do personagem escolhido pelo jogador.
@@ -21,11 +17,11 @@ class Jogador():
     
     Inventario = []
     
-    def __init__(self, Nome, Nivel=1, XpMax=100, MaxVida=100, MaxVigor=10, Defesa=10):
+    def __init__(self, Nome, Nivel=1, MaxVida=100, MaxVigor=10, Defesa=10):
         self.Nome = Nome
-        self.Nivel = Nivel
+        self.Nivel = Nivel 
         self.XP = 0 
-        self.XPMax = XpMax
+        self.XPMax = 100
         self.Vida = MaxVida
         self.MaxVida = MaxVida
         self.Vigor = MaxVigor   
@@ -40,7 +36,7 @@ class Jogador():
         conteudo += f"\nVigor: {self.Vigor}"
         conteudo += f"\nDefesa: {self.Defesa}"
         
-        conteudo += f"\nInventário: {Jogador.Inventario}"
+        conteudo += f"\nInventário: {Player.Inventario}"
         return conteudo
 
     def atacar(self, alvo):
@@ -77,6 +73,3 @@ class Jogador():
     
     def esta_vivo(self):
         return self.Vida > 0
-
-p1 = Jogador("Rafael", 1, 100, 100, 10)
-print(p1)
