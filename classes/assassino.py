@@ -1,15 +1,21 @@
-from player import Player
+from classe import Classe
 
-from rich import print
-from rich.traceback import install
+class Assassino(Classe):
+    """Dano físico rápido: muito vigor, dano baseado em Destreza."""
 
-install()
+    NOME = "Assassino"
 
-class Assasino(Player):
-    def __init__(self, Nome, Nivel=1, MaxVida=110, MaxVigor=8, Defesa=8):
-        super().__init__(Nome, Nivel, MaxVida, MaxVigor, Defesa)
-    
-    def atacar(self, alvo):
-        print(f"O jogador {self.Nome} chegou na espreita e atacou o inimigo!")
-        return alvo.sofrer_dano(12.5)
-    
+    def __init__(self):
+        super().__init__(max_vida=110, max_vigor=14, max_mana=20, defesa=8)
+
+    def atacar(self, alvo, destreza=0, **kwargs):
+        dano = 12 + destreza * 1.5
+        return alvo.sofrer_dano(dano)
+
+    def ataque_especial(self, alvo, destreza=0, **kwargs):
+        custo = 6
+        if self.Vigor < custo:
+            return "Vigor insuficiente para usar Golpe Sombrio!"
+        self.Vigor -= custo
+        dano = 22 + destreza * 2.5
+        return f"GOLPE SOMBRIO atacando pelas sombras! {alvo.sofrer_dano(dano)}"
